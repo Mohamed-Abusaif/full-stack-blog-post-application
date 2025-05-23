@@ -1,0 +1,81 @@
+/* General Styles */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+/* Card Hover Effects */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Custom Button Styles */
+.btn-primary {
+  background-color: #4361ee;
+  border-color: #4361ee;
+}
+
+.btn-primary:hover {
+  background-color: #3a56d4;
+  border-color: #3a56d4;
+}
+
+.btn-outline-primary {
+  color: #4361ee;
+  border-color: #4361ee;
+}
+
+.btn-outline-primary:hover {
+  background-color: #4361ee;
+  border-color: #4361ee;
+}
+
+/* Navbar Customization */
+.navbar-dark.bg-primary {
+  background-color: #4361ee !important;
+}
+
+/* Footer Styles */
+footer {
+  border-top: 1px solid #e9ecef;
+}
+
+footer a:hover {
+  color: #4361ee !important;
+}
+
+/* Page Headings */
+h1,
+h2 {
+  font-weight: 600;
+  color: #212529;
+}
+
+/* Author and Post Details */
+.card-title {
+  color: #212529;
+  font-weight: 600;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+}
+
+/* Form Styles */
+.form-control:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+}
+
+/* Alert Customization */
+.alert-info {
+  background-color: #e6f1ff;
+  border-color: #bfd8ff;
+  color: #0a58ca;
+}

@@ -1,0 +1,64 @@
+{% extends 'blog/base.html' %} {% block title %}{{ author.first_name }} {{
+author.last_name }}{% endblock title %} {% block content %}
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <h1 class="card-title mb-3">
+      {{ author.first_name }} {{ author.last_name }}
+    </h1>
+
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <p><i class="fas fa-envelope me-2"></i> {{ author.email }}</p>
+        <p><i class="fas fa-phone me-2"></i> {{ author.phone_number }}</p>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <a href="{% url 'author_list' %}" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Authors
+      </a>
+      <div>
+        <a
+          href="{% url 'author_update' author.id %}"
+          class="btn btn-outline-primary me-2"
+        >
+          <i class="fas fa-edit"></i> Edit
+        </a>
+        <a
+          href="{% url 'author_delete' author.id %}"
+          class="btn btn-outline-danger"
+        >
+          <i class="fas fa-trash"></i> Delete
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="mb-3">Posts by {{ author.first_name }}</h2>
+
+{% if author.posts.all %}
+<div class="row">
+  {% for post in author.posts.all %}
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.content|truncatechars:100 }}</p>
+      </div>
+      <div class="card-footer bg-white">
+        <a
+          href="{% url 'post_detail' post.id %}"
+          class="btn btn-sm btn-outline-primary"
+          >Read More</a
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">
+  <p>{{ author.first_name }} hasn't written any posts yet.</p>
+</div>
+{% endif %} {% endblock content %}

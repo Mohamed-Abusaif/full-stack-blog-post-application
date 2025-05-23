@@ -1,0 +1,60 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{% if form.instance.pk %}Edit Post{% else %}New Post{% endif %}{% endblock title %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-body">
+        <h1 class="card-title mb-4">{% if form.instance.pk %}Edit Post{% else %}Create New Post{% endif %}</h1>
+        
+        <form method="post" novalidate>
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+                <input type="text" name="{{ form.title.name }}" id="{{ form.title.id_for_label }}" 
+                       class="form-control {% if form.title.errors %}is-invalid{% endif %}"
+                       value="{{ form.title.value|default:'' }}">
+                {% if form.title.errors %}
+                <div class="invalid-feedback">
+                    {{ form.title.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-3">
+                <label for="{{ form.author.id_for_label }}" class="form-label">Author</label>
+                <select name="{{ form.author.name }}" id="{{ form.author.id_for_label }}" 
+                        class="form-control {% if form.author.errors %}is-invalid{% endif %}">
+                    <option value="">---------</option>
+                    {% for author_id, author_name in form.fields.author.choices %}
+                    <option value="{{ author_id }}" {% if form.author.value|stringformat:"s" == author_id|stringformat:"s" %}selected{% endif %}>{{ author_name }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.author.errors %}
+                <div class="invalid-feedback">
+                    {{ form.author.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-4">
+                <label for="{{ form.content.id_for_label }}" class="form-label">Content</label>
+                <textarea name="{{ form.content.name }}" id="{{ form.content.id_for_label }}" 
+                          class="form-control {% if form.content.errors %}is-invalid{% endif %}" 
+                          rows="5">{{ form.content.value|default:'' }}</textarea>
+                {% if form.content.errors %}
+                <div class="invalid-feedback">
+                    {{ form.content.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'post_list' %}" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %} 
